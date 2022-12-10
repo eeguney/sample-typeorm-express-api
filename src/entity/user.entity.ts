@@ -1,13 +1,29 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from "typeorm"
+import { IsEmail, IsNotEmpty, Min, validateOrReject } from "class-validator";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
 
 @Entity()
-export class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    firstName: string
+  @Column({ nullable: false })
+  firstName: string;
 
-    @Column()
-    lastName: string
+  @Column({ nullable: false })
+  lastName: string;
+
+  @Column()
+  @IsEmail()
+  email: string;
+
+  @Column()
+  @IsNotEmpty()
+  @Min(11)
+  password: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

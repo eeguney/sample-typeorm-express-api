@@ -8,7 +8,7 @@ const myDataSource = new DataSource({
     password: "1234",
     database: "typeormtest",
     entities: ["src/entity/*.ts"],
-    logging: false,
+    logging: true,
     synchronize: true,
 });
 

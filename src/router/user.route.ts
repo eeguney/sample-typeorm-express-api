@@ -1,5 +1,7 @@
 import { Router } from "express";
 import UserController from "../controllers/user.controller";
+import { DTORegister } from "../dto/user/DtoRegister";
+import validation from "../middlewares/validation.middleware";
 import UserService from "../services/user.service";
 
 export class UserRoute {
@@ -14,7 +16,11 @@ export class UserRoute {
 
   main(): Router {
     this.userRouter.get("/", this.controller.getAllUsers);
-    this.userRouter.post("/", this.controller.addNewUser);
+    this.userRouter.post(
+      "/",
+      [validation(DTORegister)],
+      this.controller.addNewUser
+    );
     return this.userRouter;
   }
 }

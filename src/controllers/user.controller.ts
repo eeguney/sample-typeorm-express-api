@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
 import STATUS_CODE from "../constants/statuscodes";
-import { User } from "../entity/user.entity";
+import { DTORegister } from "../dto/user/DtoRegister";
 import UserService from "../services/user.service";
 import logger from "../utils/logger";
 
@@ -22,7 +22,7 @@ export default class UserController {
   };
 
   addNewUser: RequestHandler = async (req: Request, res: Response) => {
-    const theUser: User = req.body;
+    const theUser: DTORegister = req.body;
     try {
       const data = await this.userService.addNewUser(theUser);
       logger.info(`User created with name: ${theUser.firstName} ${theUser.lastName}`);

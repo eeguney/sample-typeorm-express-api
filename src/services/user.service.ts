@@ -1,6 +1,8 @@
 import { User } from "../entity/user.entity";
 import myDataSource from "../data-source";
 import { Repository } from "typeorm";
+import { DTORegister } from "../dto/user/DtoRegister";
+import { validate } from "class-validator";
 
 export default class UserService {
   private userRepository: Repository<User>;
@@ -24,10 +26,8 @@ export default class UserService {
     return allUsers;
   }
 
-  public async addNewUser(user: User): Promise<User> {
-    if (!user.firstName || !user.lastName) {
-      throw "Bad request";
-    }
+  public async addNewUser(user: DTORegister): Promise<User> {
+    if (!user.firstName || !user.lastName || !user.email || !user.password) throw "Bad request";
     return await this.userRepository.save(user);
   }
 }
