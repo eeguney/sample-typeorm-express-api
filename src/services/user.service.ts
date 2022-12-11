@@ -1,8 +1,7 @@
-import { User } from "../entity/user.entity";
+import { User } from "../entity/User.entity";
 import myDataSource from "../data-source";
-import { Repository } from "typeorm";
+import { DeleteResult, Repository } from "typeorm";
 import { DTORegister } from "../dto/user/DtoRegister";
-import { validate } from "class-validator";
 
 export default class UserService {
   private userRepository: Repository<User>;
@@ -30,4 +29,12 @@ export default class UserService {
     if (!user.firstName || !user.lastName || !user.email || !user.password) throw "Bad request";
     return await this.userRepository.save(user);
   }
+
+  public async deleteAnUserWithUsername(username: string): Promise<DeleteResult> {
+    if(!username) throw "Username cannot be empty";
+    const thatUser = await this.userRepository.findOneBy({ username });
+    if(!thatUser) throw "There is no user with this Id";
+    return await this.userRepository.delete({ id: thatUser.id });
+  }
+  
 }

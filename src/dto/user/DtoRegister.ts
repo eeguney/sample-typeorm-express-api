@@ -1,20 +1,26 @@
-import { IsEmail, IsNotEmpty, MinLength, validateOrReject } from "class-validator";
-import { BeforeInsert, BeforeUpdate } from "typeorm";
+import {
+  IsEmail,
+  IsNotEmpty,
+  MaxLength,
+  MinLength,
+} from "class-validator";
 
 export class DTORegister {
-
-    @IsNotEmpty()
+  @IsNotEmpty()
   firstName: string;
 
   @IsNotEmpty()
   lastName: string;
 
   @IsNotEmpty()
+  username: string;
+
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 
   @IsNotEmpty()
-  @MinLength(11)
+  @MinLength(8)
+  @MaxLength(24)
   password: string;
-
 }

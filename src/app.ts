@@ -1,5 +1,5 @@
 import myDataSource from "./data-source";
-import CreateExpressServer from "./utils/createExpressServer";
+import CreateExpressServer from "./utils/CreateExpressServer";
 import logger from "./utils/logger";
 
 class Application {

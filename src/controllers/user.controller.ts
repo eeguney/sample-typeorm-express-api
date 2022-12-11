@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import STATUS_CODE from "../constants/statuscodes";
 import { DTORegister } from "../dto/user/DtoRegister";
-import UserService from "../services/user.service";
+import UserService from "../services/User.service";
 import logger from "../utils/logger";
 
 export default class UserController {
@@ -32,4 +32,16 @@ export default class UserController {
       return res.status(STATUS_CODE.ERROR.BAD_REQUEST).send(error);
     }
   };
+
+  deleteAnUserWithUsername: RequestHandler = async (req: Request, res: Response) => {
+    const { username } = req.params;
+    try {
+      const data = await this.userService.deleteAnUserWithUsername(username);
+      logger.info(`User deleted`);
+      return res.status(STATUS_CODE.SUCCESS.OK).json(data);
+    } catch (error) {
+      logger.error(error);
+      return res.status(STATUS_CODE.ERROR.BAD_REQUEST).send(error);
+    }
+  }
 }

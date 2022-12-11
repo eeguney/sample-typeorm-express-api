@@ -1,10 +1,10 @@
 import { Router } from "express";
-import UserController from "../controllers/user.controller";
+import UserController from "../controllers/User.controller";
 import { DTORegister } from "../dto/user/DtoRegister";
-import validation from "../middlewares/validation.middleware";
-import UserService from "../services/user.service";
+import validation from "../middlewares/Validation.middleware";
+import UserService from "../services/User.service";
 
-export class UserRoute {
+class UserRoute {
   private userRouter: Router;
   service: UserService;
   controller: UserController;
@@ -21,6 +21,7 @@ export class UserRoute {
       [validation(DTORegister)],
       this.controller.addNewUser
     );
+    this.userRouter.delete("/:username", this.controller.deleteAnUserWithUsername);
     return this.userRouter;
   }
 }
