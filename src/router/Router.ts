@@ -1,7 +1,7 @@
 import { Router } from "express";
-import BlogPostRoute from "./blogPost.route";
-import BlogPostCategoryRoute from "./blogPostCategory.route";
-import UserRouter from "./user.route";
+import BlogPostRoute from "./BlogPost.route";
+import BlogPostCategoryRoute from "./BlogPostCategory.route";
+import UserRouter from "./User.route";
 
 class MainRouter {
   private router;
